@@ -1,0 +1,4 @@
+/.buildout-*/
+/.installed.cfg
+/*.egg-info/
+/bin/
