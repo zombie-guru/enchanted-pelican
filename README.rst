@@ -23,7 +23,7 @@ Optionally, provide some extra settings
 .. code-block:: python
 
     ENCHANTED_PELICAN_SETTINGS = {
-        'word_file': '/path/to/word/file.txt',
+        'wordfile': '/path/to/word/file.txt',
         'languange': 'en_US'
     }
 
