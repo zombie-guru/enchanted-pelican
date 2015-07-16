@@ -48,7 +48,10 @@ class EnchantedPelican(object):
         cleaned = TAGS.sub('', content.content)
         mistakes = []
         for word in (x.group(0) for x in WORDS.finditer(cleaned)):
-            if not self.d.check(word):
+            if any(self.d.check(x()) for x in (
+                   word.lower, word.upper, word.capitalize)):
+                pass
+            else:
                 mistakes.append(word)
 
         if len(mistakes) > 0:
