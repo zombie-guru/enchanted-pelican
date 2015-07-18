@@ -49,7 +49,7 @@ class EnchantedPelican(object):
         else:
             self.d = enchant.Dict(language)
 
-    def on_article_generator_write_article(self, article_generator, content):
+    def _check_content(self, content):
         cleaned = content.content
         for exp in IGNORE:
             cleaned = exp.sub('', cleaned)
@@ -64,6 +64,13 @@ class EnchantedPelican(object):
         if len(mistakes) > 0:
             raise SpellingError(mistakes, self.d, content.source_path)
 
+    def on_article_generator_write_article(self, article_generator, content):
+        self._check_content(content)
+
+    def on_page_generator_finalized(self, page_generator):
+        for page in page_generator.pages:
+            self._check_content(page)
+
 
 ep = EnchantedPelican()
 
@@ -73,3 +80,5 @@ def register():
         ep.on_initialized)
     pelican.signals.article_generator_write_article.connect(
         ep.on_article_generator_write_article)
+    pelican.signals.page_generator_finalized.connect(
+        ep.on_page_generator_finalized)
