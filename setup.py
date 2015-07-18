@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(name='enchanted-pelican',
-      version='0.1',
+      version='0.2',
       description='Spellchecking plugin for Pelican static site generator.',
       classifiers=[],
       keywords="pelican spellcheck",
